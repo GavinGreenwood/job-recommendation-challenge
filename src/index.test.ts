@@ -88,4 +88,26 @@ describe('recommendJobs', () => {
 
     consoleLogSpy.mockRestore();
   });
+
+  it('when no job is found, it should log "No recommended jobs for Joe"', async () => {
+    const mockMembers = [
+      { name: 'Joe', bio: "I'm a designer from London, UK" },
+    ];
+    const mockJobs = [
+      { title: 'Software Developer', location: 'London' },
+    ];
+
+    jest.mocked(fetchMembers).mockResolvedValue(mockMembers);
+    jest.mocked(fetchJobs).mockResolvedValue(mockJobs);
+
+    const consoleLogSpy = jest.spyOn(console, 'log') as jest.SpiedFunction<
+      typeof console.log
+    >;
+
+    await recommendJobs();
+
+    expect(consoleLogSpy.mock.calls[0][0]).toBe('No recommended jobs for Joe');
+
+    consoleLogSpy.mockRestore();
+  });
 });
