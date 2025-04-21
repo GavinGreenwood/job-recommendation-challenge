@@ -28,7 +28,6 @@ npm start
 ```
 
 ## 📝 Notes
-- Ensure that the folder name matches the repository name after cloning. If the repository name is different, adjust the `cd` command accordingly.
 - The solution is designed to be simple and straightforward, focusing on fetching and processing data efficiently within the given time constraints.
-- The matching logic is based on the structure of the data provided by the APIs.
-- This implementation is not exhaustive and can be extended or optimized further as needed.
+- **Unit Testing**: While the current implementation tests console logs as per the requirements, a preferred approach would be to separate the logic into a service layer. The service would handle all the business logic and be tested with type-safe unit tests. The console logger would then act as a presentation layer, which typically wouldn't be unit tested.
+- **Data Handling**: Although the current implementation accepts the data as is, the `bio` field in the member data is written in natural language. Ideally, this would be passed through a large language model (LLM) to extract structured, type-safe data. Additionally, both the jobs and members could be wrapped in objects with controlled schemas. These schemas could include additional fields like `job_id` or `member_id`, which would make searching and matching much easier and more efficient. By controlling these fields, the system could ensure consistent data validation and enable more advanced querying capabilities.
