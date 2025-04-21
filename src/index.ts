@@ -9,7 +9,7 @@ export async function recommendJobs() {
     // console.log('Members:', members);
     // console.log('Jobs:', jobs);
   } catch (error) {
-    // console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error);
   }
 }
 

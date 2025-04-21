@@ -21,4 +21,32 @@ describe('recommendJobs', () => {
    expect(fetchMembers).toHaveBeenCalled();
    expect(fetchJobs).toHaveBeenCalled();
  });
+
+ it('should log an error if fetchMembers fails', async () => {
+  const mockError = new Error('fetchMembers failed');
+  jest.mocked(fetchMembers).mockRejectedValue(mockError);
+  jest.mocked(fetchJobs).mockResolvedValue([]);
+
+  const consoleErrorSpy = jest.spyOn(console, 'error') as jest.SpiedFunction<typeof console.error>;
+
+  await recommendJobs();
+
+  expect(consoleErrorSpy).toHaveBeenCalledWith('Error fetching data:', mockError);
+
+  consoleErrorSpy.mockRestore();
+});
+
+it('should log an error if fetchJobs fails', async () => {
+  const mockError = new Error('fetchJobs failed');
+  jest.mocked(fetchMembers).mockResolvedValue([]);
+  jest.mocked(fetchJobs).mockRejectedValue(mockError);
+
+  const consoleErrorSpy = jest.spyOn(console, 'error') as jest.SpiedFunction<typeof console.error>;
+
+  await recommendJobs();
+
+  expect(consoleErrorSpy).toHaveBeenCalledWith('Error fetching data:', mockError);
+
+  consoleErrorSpy.mockRestore();
+});
 });

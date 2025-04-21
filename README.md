@@ -20,6 +20,9 @@ cd job-recommendation-challenge
 # Install dependencies
 npm install
 
+# Run unit tests
+npm test
+
 # Run the recommendation script
 npm start
 ```
